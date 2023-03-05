@@ -38,7 +38,7 @@ Create and push a git tag
 
 ```bash
 new_tag=v$(date +'%Y.%m.%d').001
-git tag -a $new_tag
+git tag $new_tag
 git push origin $new_tag
 ```
 
