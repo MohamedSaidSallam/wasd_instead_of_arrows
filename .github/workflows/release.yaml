@@ -18,7 +18,7 @@ jobs:
         with:
           in: wasd_instead_of_arrows.ahk
           out: wasd_instead_of_arrows_${{ github.ref_name }}.exe
-          icon: icon.png
+          icon: icon.ico
 
       - name: Release
         uses: softprops/action-gh-release@v1
