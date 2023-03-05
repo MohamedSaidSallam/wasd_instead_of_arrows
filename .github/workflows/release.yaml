@@ -25,6 +25,8 @@ jobs:
         id: release
         with:
           files: wasd_instead_of_arrows_${{ github.ref_name }}.exe
+        permissions:
+          contents: write
 
       - uses: sarisia/actions-status-discord@v1
         if: always()
