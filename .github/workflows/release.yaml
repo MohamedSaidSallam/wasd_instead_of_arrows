@@ -1,0 +1,36 @@
+---
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*.*"
+
+jobs:
+  build_and_release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Ahk2Exe
+        uses: nekocodeX/GitHub-Action-Ahk2Exe@main
+        with:
+          in: wasd_instead_of_arrows.ahk
+          out: wasd_instead_of_arrows_${{ github.ref_name }}.exe
+          icon: icon.png
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        id: release
+        with:
+          files: wasd_instead_of_arrows_${{ github.ref_name }}.exe
+
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          url: ${{ steps.release.outputs.url }}
+          description: |
+            New Version (`${{ github.ref_name }}`).
+            [Check out the it out!](${{ steps.release.outputs.url }})
