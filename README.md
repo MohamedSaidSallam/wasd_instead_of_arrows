@@ -1,9 +1,9 @@
 # WASD Instead Of Arrows
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/MohamedSaidSallam/wasd_instead_of_arrows/release)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/MohamedSaidSallam/wasd_instead_of_arrows)
-![GitHub all releases](https://img.shields.io/github/downloads/MohamedSaidSallam/wasd_instead_of_arrows/total)
-![GitHub](https://img.shields.io/github/license/MohamedSaidSallam/wasd_instead_of_arrows)
+[![Release](https://github.com/MohamedSaidSallam/wasd_instead_of_arrows/actions/workflows/release.yaml/badge.svg)](https://github.com/MohamedSaidSallam/wasd_instead_of_arrows/actions/workflows/release.yaml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/MohamedSaidSallam/wasd_instead_of_arrows)](https://github.com/MohamedSaidSallam/wasd_instead_of_arrows/releases)
+[![GitHub all releases](https://img.shields.io/github/downloads/MohamedSaidSallam/wasd_instead_of_arrows/total)](https://github.com/MohamedSaidSallam/wasd_instead_of_arrows/releases)
+[![GitHub](https://img.shields.io/github/license/MohamedSaidSallam/wasd_instead_of_arrows)](LICENSE)
 
 [Autohotkey](https://www.autohotkey.com/) script to allow wasd to be used as arrows when pressing <kbd>Right Alt</kbd>.
 
