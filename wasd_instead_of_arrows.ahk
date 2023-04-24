@@ -8,6 +8,7 @@ TrayTip, WASD instead of arrows, ON, 5, 17
 
 ; For AutoHotKey noobs like myself:
     ; ! ALT (either)
+    ; <! LEFT ALT
     ; >! RIGHT ALT
     ; ^ CTRL
     ; # WINDOWS
@@ -44,6 +45,22 @@ TrayTip, WASD instead of arrows, ON, 5, 17
 
 >!^+a::Send ^+{LEFT}
 >!^+d::Send ^+{RIGHT}
+
+; ALT wasd
+
+>!<!w::Send !{UP}
+>!<!s::Send !{DOWN}
+
+>!<!a::Send !{LEFT}
+>!<!d::Send !{RIGHT}
+
+; ALT SHIFT wasd
+
+>!<!+w::Send !+{UP}
+>!<!+s::Send !+{DOWN}
+
+>!<!+a::Send !+{LEFT}
+>!<!+d::Send !+{RIGHT}
 
 ; ----------------------------------
 
