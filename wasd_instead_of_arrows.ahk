@@ -64,6 +64,12 @@ TrayTip, WASD instead of arrows, ON, 5, 17
 
 ; ----------------------------------
 
+; disable alt tab with right alt
+
+>!Tab::return
+
+; ----------------------------------
+
 ; Home END
 
 >!q::Send {HOME}

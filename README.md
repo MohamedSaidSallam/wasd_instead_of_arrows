@@ -28,6 +28,8 @@ Ctrl, Shift, and Right Alt work with wasd, <kbd>Home</kbd>, and <kbd> End</kbd>.
 
 e.g. <kbd>Right Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd>+ <kbd>d</kbd> => <kbd>Ctrl</kbd> + <kbd>Shift</kbd>+ <kbd>→</kbd> => Select next word.
 
+> Note: <kbd>Alt</kbd> <kbd>Tab</kbd> using <kbd>Right Alt</kbd> will be disabled when using the script
+
 ## Launch on Windows Start
 
 1. <kbd>Win</kbd> + <kbd>R</kbd>
