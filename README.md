@@ -22,7 +22,7 @@ Prefix everything with <kbd>Right Alt</kbd>.
 | <kbd>Right Alt</kbd> + <kbd>z</kbd> | <kbd> Page Up </kbd> |
 | <kbd>Right Alt</kbd> + <kbd>x</kbd> | <kbd>Page Down</kbd> |
 
-Ctrl and Shift work with wasd, <kbd>Home</kbd>, and <kbd> End</kbd>.
+Ctrl, Shift, and Right Alt work with wasd, <kbd>Home</kbd>, and <kbd> End</kbd>.
 
 e.g. <kbd>Right Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>Shift</kbd>+ <kbd>d</kbd> => <kbd>Ctrl</kbd> + <kbd>Shift</kbd>+ <kbd>→</kbd> => Select next word.
 

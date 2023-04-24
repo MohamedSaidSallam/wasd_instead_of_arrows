@@ -4,6 +4,8 @@ SendMode, Input
 SetBatchLines, -1
 SetWorkingDir, %A_ScriptDir%
 
+TrayTip, WASD instead of arrows, ON, 5, 17
+
 ; For AutoHotKey noobs like myself:
     ; ! ALT (either)
     ; >! RIGHT ALT
@@ -71,4 +73,11 @@ SetWorkingDir, %A_ScriptDir%
 
 >!z::Send {PgUp}
 >!x::Send {PgDn}
+
+; ----------------------------------
+
+; delete insert
+
+>!j::Send {Del}
+>!k::Send {Insert}
 
