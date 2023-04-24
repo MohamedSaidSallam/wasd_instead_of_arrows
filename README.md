@@ -21,6 +21,8 @@ Prefix everything with <kbd>Right Alt</kbd>.
 | <kbd>Right Alt</kbd> + <kbd>e</kbd> | <kbd>   End   </kbd> |
 | <kbd>Right Alt</kbd> + <kbd>z</kbd> | <kbd> Page Up </kbd> |
 | <kbd>Right Alt</kbd> + <kbd>x</kbd> | <kbd>Page Down</kbd> |
+| <kbd>Right Alt</kbd> + <kbd>j</kbd> | <kbd>Del</kbd> |
+| <kbd>Right Alt</kbd> + <kbd>k</kbd> | <kbd>Ins</kbd> |
 
 Ctrl, Shift, and Right Alt work with wasd, <kbd>Home</kbd>, and <kbd> End</kbd>.
 
