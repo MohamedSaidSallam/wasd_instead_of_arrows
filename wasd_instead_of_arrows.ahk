@@ -3,8 +3,20 @@
 SendMode, Input
 SetBatchLines, -1
 SetWorkingDir, %A_ScriptDir%
+#Persistent
 
 TrayTip, WASD instead of arrows, ON, 5, 17
+
+OnMessage(0x218, "WM_POWERBROADCAST")
+
+WM_POWERBROADCAST(wParam, lParam)
+{
+    if (wParam = 7)  ; 7 = PBT_APMRESUMEAUTOMATIC
+    {
+        Reload  ; Automatically reloads the script after resume
+    }
+}
+
 
 ; For AutoHotKey noobs like myself:
     ; ! ALT (either)
@@ -14,53 +26,57 @@ TrayTip, WASD instead of arrows, ON, 5, 17
     ; # WINDOWS
     ; + SHIFT
 
+; Disable right alt alone
+
+RAlt::Return
+
 ; wasd
 
->!w::Send {UP}
->!s::Send {DOWN}
+>!w::SendInput {UP}
+>!s::SendInput {DOWN}
 
->!a::Send {LEFT}
->!d::Send {RIGHT}
+>!a::SendInput {LEFT}
+>!d::SendInput {RIGHT}
 
 ; CTRL wasd
 
->!^w::Send ^{UP}
->!^s::Send ^{DOWN}
+>!^w::SendInput ^{UP}
+>!^s::SendInput ^{DOWN}
 
->!^a::Send ^{LEFT}
->!^d::Send ^{RIGHT}
+>!^a::SendInput ^{LEFT}
+>!^d::SendInput ^{RIGHT}
 
 ; SHIFT wasd
 
->!+w::Send +{UP}
->!+s::Send +{DOWN}
+>!+w::SendInput +{UP}
+>!+s::SendInput +{DOWN}
 
->!+a::Send +{LEFT}
->!+d::Send +{RIGHT}
+>!+a::SendInput +{LEFT}
+>!+d::SendInput +{RIGHT}
 
 ; CTRL SHIFT wasd
 
->!^+w::Send ^+{UP}
->!^+s::Send ^+{DOWN}
+>!^+w::SendInput ^+{UP}
+>!^+s::SendInput ^+{DOWN}
 
->!^+a::Send ^+{LEFT}
->!^+d::Send ^+{RIGHT}
+>!^+a::SendInput ^+{LEFT}
+>!^+d::SendInput ^+{RIGHT}
 
 ; ALT wasd
 
->!<!w::Send !{UP}
->!<!s::Send !{DOWN}
+>!<!w::SendInput !{UP}
+>!<!s::SendInput !{DOWN}
 
->!<!a::Send !{LEFT}
->!<!d::Send !{RIGHT}
+>!<!a::SendInput !{LEFT}
+>!<!d::SendInput !{RIGHT}
 
 ; ALT SHIFT wasd
 
->!<!+w::Send !+{UP}
->!<!+s::Send !+{DOWN}
+>!<!+w::SendInput !+{UP}
+>!<!+s::SendInput !+{DOWN}
 
->!<!+a::Send !+{LEFT}
->!<!+d::Send !+{RIGHT}
+>!<!+a::SendInput !+{LEFT}
+>!<!+d::SendInput !+{RIGHT}
 
 ; ----------------------------------
 
@@ -72,35 +88,46 @@ TrayTip, WASD instead of arrows, ON, 5, 17
 
 ; Home END
 
->!q::Send {HOME}
->!e::Send {END}
+>!q::SendInput {HOME}
+>!e::SendInput {END}
 
 ; CTRL Home END
 
->!^q::Send ^{HOME}
->!^e::Send ^{END}
+>!^q::SendInput ^{HOME}
+>!^e::SendInput ^{END}
 
 ; SHIFT Home END
 
->!+q::Send +{HOME}
->!+e::Send +{END}
+>!+q::SendInput +{HOME}
+>!+e::SendInput +{END}
 
 ; CTRL SHIFT Home END
 
->!^+q::Send ^+{HOME}
->!^+e::Send ^+{END}
+>!^+q::SendInput ^+{HOME}
+>!^+e::SendInput ^+{END}
 
 ; ----------------------------------
 
 ; PgUp PgDn
 
->!z::Send {PgUp}
->!x::Send {PgDn}
+>!z::SendInput {PgUp}
+>!x::SendInput {PgDn}
 
 ; ----------------------------------
 
-; delete insert
+; delete
 
->!j::Send {Del}
->!k::Send {Insert}
+>!j::SendInput {Del}
 
+; ----------------------------------
+
+; insert
+>!k::SendInput {Insert}
+
+; ----------------------------------
+
+; shift insert
+
+>!+k::SendInput +{Insert}
+
+; ----------------------------------
