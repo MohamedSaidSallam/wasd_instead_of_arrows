@@ -1,3 +1,8 @@
+;@Ahk2Exe-SetProductName "WASD Instead Of Arrows"
+;@Ahk2Exe-SetCompanyName "MohamedSaidSallam"
+;@Ahk2Exe-SetCopyright "© 2025 MohamedSaidSallam"
+;@Ahk2Exe-SetVersion VERSION_PLACEHOLDER
+
 #SingleInstance Force
 SendMode "Input"
 SetWorkingDir A_ScriptDir
@@ -18,9 +23,6 @@ OnMessage WM_POWERBROADCAST, onPowerBroadcast
 ; =======================
 ; Key remaps
 ; =======================
-
-; Disable right alt alone
-RAlt::Return
 
 ; wasd
 >!w::SendInput "{Up}"

@@ -11,9 +11,19 @@ jobs:
     runs-on: windows-latest
     permissions:
       contents: write
+    env:
+      SCRIPT_NAME: wasd_instead_of_arrows.ahk
+      RELEASE_FILE_NAME: wasd_instead_of_arrows_${{ github.ref_name }}.exe
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
+
+      - name: Set version in ahk file
+        shell: pwsh
+        run: |
+          $version="${{ github.ref_name }}"
+          (Get-Content ${{ env.SCRIPT_NAME }}) -replace 'VERSION_PLACEHOLDER', $version |
+            Set-Content ${{ env.SCRIPT_NAME }}
 
       - name: Download AutoHotkey_2 and Ahk2Exe
         shell: pwsh
@@ -33,14 +43,23 @@ jobs:
         run: |
           $cwd = (Get-Item .).FullName;
 
-          $command = "$cwd/.ahk2exe/Ahk2Exe.exe /in wasd_instead_of_arrows.ahk /out wasd_instead_of_arrows_${{ github.ref_name }}.exe /icon icon.ico /base $cwd/.autohotkey/AutoHotkey32.exe /silent  | Write-Output"
+          $command = "$cwd/.ahk2exe/Ahk2Exe.exe /in ${{ env.SCRIPT_NAME }} /out ${{ env.RELEASE_FILE_NAME }} /icon icon.ico /base $cwd/.autohotkey/AutoHotkey64.exe /compress 0 /silent  | Write-Output"
           Invoke-Expression $command
 
+      - name: Calculate SHA256
+        id: hash
+        shell: pwsh
+        run: |
+          $hash = Get-FileHash -Path "${{ env.RELEASE_FILE_NAME }}" -Algorithm SHA256
+          echo "hash=$($hash.Hash)" >> $env:GITHUB_OUTPUT
+
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         id: release
         with:
-          files: wasd_instead_of_arrows_${{ github.ref_name }}.exe
+          body: |
+            SHA256: ${{ steps.hash.outputs.hash }}
+          files: ${{ env.RELEASE_FILE_NAME }}
 
       - uses: sarisia/actions-status-discord@v1
         if: always()
