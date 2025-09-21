@@ -1,133 +1,84 @@
-#NoEnv
-#SingleInstance, Force
-SendMode, Input
-SetBatchLines, -1
-SetWorkingDir, %A_ScriptDir%
-#Persistent
+#SingleInstance Force
+SendMode "Input"
+SetWorkingDir A_ScriptDir
+Persistent
 
-TrayTip, WASD instead of arrows, ON, 5, 17
+TrayTip "ON", "WASD instead of arrows"
 
-OnMessage(0x218, "WM_POWERBROADCAST")
-
-WM_POWERBROADCAST(wParam, lParam)
+onPowerBroadcast(wParam, lParam, msg, hwnd)
 {
-    if (wParam = 7)  ; 7 = PBT_APMRESUMEAUTOMATIC
-    {
-        Reload  ; Automatically reloads the script after resume
-    }
+    PBT_APMRESUMEAUTOMATIC := 7
+    if (wParam = PBT_APMRESUMEAUTOMATIC)
+        Reload()
 }
 
+WM_POWERBROADCAST := 0x0218
+OnMessage WM_POWERBROADCAST, onPowerBroadcast
 
-; For AutoHotKey noobs like myself:
-    ; ! ALT (either)
-    ; <! LEFT ALT
-    ; >! RIGHT ALT
-    ; ^ CTRL
-    ; # WINDOWS
-    ; + SHIFT
+; =======================
+; Key remaps
+; =======================
 
 ; Disable right alt alone
-
 RAlt::Return
 
 ; wasd
+>!w::SendInput "{Up}"
+>!s::SendInput "{Down}"
+>!a::SendInput "{Left}"
+>!d::SendInput "{Right}"
 
->!w::SendInput {UP}
->!s::SendInput {DOWN}
+; CTRL + wasd
+>!^w::SendInput "^{Up}"
+>!^s::SendInput "^{Down}"
+>!^a::SendInput "^{Left}"
+>!^d::SendInput "^{Right}"
 
->!a::SendInput {LEFT}
->!d::SendInput {RIGHT}
+; SHIFT + wasd
+>!+w::SendInput "+{Up}"
+>!+s::SendInput "+{Down}"
+>!+a::SendInput "+{Left}"
+>!+d::SendInput "+{Right}"
 
-; CTRL wasd
+; CTRL + SHIFT + wasd
+>!^+w::SendInput "^+{Up}"
+>!^+s::SendInput "^+{Down}"
+>!^+a::SendInput "^+{Left}"
+>!^+d::SendInput "^+{Right}"
 
->!^w::SendInput ^{UP}
->!^s::SendInput ^{DOWN}
+; ALT + wasd (Left Alt + Right Alt)
+>!<!w::SendInput "!{Up}"
+>!<!s::SendInput "!{Down}"
+>!<!a::SendInput "!{Left}"
+>!<!d::SendInput "!{Right}"
 
->!^a::SendInput ^{LEFT}
->!^d::SendInput ^{RIGHT}
+; ALT + SHIFT + wasd
+>!<!+w::SendInput "!+{Up}"
+>!<!+s::SendInput "!+{Down}"
+>!<!+a::SendInput "!+{Left}"
+>!<!+d::SendInput "!+{Right}"
 
-; SHIFT wasd
+; Disable Alt+Tab with right alt
+>!Tab::Return
 
->!+w::SendInput +{UP}
->!+s::SendInput +{DOWN}
+; Home / End
+>!q::SendInput "{Home}"
+>!^q::SendInput "^{Home}"
+>!+q::SendInput "+{Home}"
+>!^+q::SendInput "^+{Home}"
 
->!+a::SendInput +{LEFT}
->!+d::SendInput +{RIGHT}
+>!e::SendInput "{End}"
+>!^e::SendInput "^{End}"
+>!+e::SendInput "+{End}"
+>!^+e::SendInput "^+{End}"
 
-; CTRL SHIFT wasd
+; PgUp / PgDn
+>!z::SendInput "{PgUp}"
+>!x::SendInput "{PgDn}"
 
->!^+w::SendInput ^+{UP}
->!^+s::SendInput ^+{DOWN}
+; Delete
+>!j::SendInput "{Del}"
 
->!^+a::SendInput ^+{LEFT}
->!^+d::SendInput ^+{RIGHT}
-
-; ALT wasd
-
->!<!w::SendInput !{UP}
->!<!s::SendInput !{DOWN}
-
->!<!a::SendInput !{LEFT}
->!<!d::SendInput !{RIGHT}
-
-; ALT SHIFT wasd
-
->!<!+w::SendInput !+{UP}
->!<!+s::SendInput !+{DOWN}
-
->!<!+a::SendInput !+{LEFT}
->!<!+d::SendInput !+{RIGHT}
-
-; ----------------------------------
-
-; disable alt tab with right alt
-
->!Tab::return
-
-; ----------------------------------
-
-; Home END
-
->!q::SendInput {HOME}
->!e::SendInput {END}
-
-; CTRL Home END
-
->!^q::SendInput ^{HOME}
->!^e::SendInput ^{END}
-
-; SHIFT Home END
-
->!+q::SendInput +{HOME}
->!+e::SendInput +{END}
-
-; CTRL SHIFT Home END
-
->!^+q::SendInput ^+{HOME}
->!^+e::SendInput ^+{END}
-
-; ----------------------------------
-
-; PgUp PgDn
-
->!z::SendInput {PgUp}
->!x::SendInput {PgDn}
-
-; ----------------------------------
-
-; delete
-
->!j::SendInput {Del}
-
-; ----------------------------------
-
-; insert
->!k::SendInput {Insert}
-
-; ----------------------------------
-
-; shift insert
-
->!+k::SendInput +{Insert}
-
-; ----------------------------------
+; Insert
+>!k::SendInput "{Insert}"
+>!+k::SendInput "+{Insert}"

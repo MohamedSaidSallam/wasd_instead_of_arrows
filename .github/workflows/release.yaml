@@ -15,12 +15,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Ahk2Exe
-        uses: nekocodeX/GitHub-Action-Ahk2Exe@main
-        with:
-          in: wasd_instead_of_arrows.ahk
-          out: wasd_instead_of_arrows_${{ github.ref_name }}.exe
-          icon: icon.ico
+      - name: Download AutoHotkey_2 and Ahk2Exe
+        shell: pwsh
+        run: |
+          $cwd = (Get-Item .).FullName;
+
+          Invoke-WebRequest "https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.19/AutoHotkey_2.0.19.zip" -OutFile "$cwd\autohotkey.zip";
+          Expand-Archive "$cwd\autohotkey.zip" -DestinationPath ".\.autohotkey\";
+          Remove-Item -Path "$cwd\autohotkey.zip" -Force;
+
+          Invoke-WebRequest "https://github.com/AutoHotkey/Ahk2Exe/releases/download/Ahk2Exe1.1.37.02a0a/Ahk2Exe1.1.37.02a0.zip" -OutFile "$cwd\Ahk2Exe.zip";
+          Expand-Archive "$cwd\Ahk2Exe.zip" -DestinationPath ".\.ahk2exe\";
+          Remove-Item -Path "$cwd\Ahk2Exe.zip" -Force;
+
+      - name: Run Ahk2Exe
+        shell: pwsh
+        run: |
+          $cwd = (Get-Item .).FullName;
+
+          $command = "$cwd/.ahk2exe/Ahk2Exe.exe /in wasd_instead_of_arrows.ahk /out wasd_instead_of_arrows_${{ github.ref_name }}.exe /icon icon.ico /base $cwd/.autohotkey/AutoHotkey32.exe /silent  | Write-Output"
+          Invoke-Expression $command
 
       - name: Release
         uses: softprops/action-gh-release@v1
