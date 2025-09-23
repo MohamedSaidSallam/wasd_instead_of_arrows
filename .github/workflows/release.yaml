@@ -25,26 +25,12 @@ jobs:
           (Get-Content ${{ env.SCRIPT_NAME }}) -replace 'VERSION_PLACEHOLDER', $version |
             Set-Content ${{ env.SCRIPT_NAME }}
 
-      - name: Download AutoHotkey_2 and Ahk2Exe
-        shell: pwsh
-        run: |
-          $cwd = (Get-Item .).FullName;
-
-          Invoke-WebRequest "https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.19/AutoHotkey_2.0.19.zip" -OutFile "$cwd\autohotkey.zip";
-          Expand-Archive "$cwd\autohotkey.zip" -DestinationPath ".\.autohotkey\";
-          Remove-Item -Path "$cwd\autohotkey.zip" -Force;
-
-          Invoke-WebRequest "https://github.com/AutoHotkey/Ahk2Exe/releases/download/Ahk2Exe1.1.37.02a0a/Ahk2Exe1.1.37.02a0.zip" -OutFile "$cwd\Ahk2Exe.zip";
-          Expand-Archive "$cwd\Ahk2Exe.zip" -DestinationPath ".\.ahk2exe\";
-          Remove-Item -Path "$cwd\Ahk2Exe.zip" -Force;
-
-      - name: Run Ahk2Exe
-        shell: pwsh
-        run: |
-          $cwd = (Get-Item .).FullName;
-
-          $command = "$cwd/.ahk2exe/Ahk2Exe.exe /in ${{ env.SCRIPT_NAME }} /out ${{ env.RELEASE_FILE_NAME }} /icon icon.ico /base $cwd/.autohotkey/AutoHotkey64.exe /compress 0 /silent  | Write-Output"
-          Invoke-Expression $command
+      - name: Build exe
+        uses: MohamedSaidSallam/AHK2Exe-GitHub-Action@v0.1.0-alpha
+        with:
+          in: ${{ env.SCRIPT_NAME }}
+          out: ${{ env.RELEASE_FILE_NAME }}
+          icon: icon.ico
 
       - name: Calculate SHA256
         id: hash
