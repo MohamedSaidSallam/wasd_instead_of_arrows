@@ -26,7 +26,7 @@ jobs:
             Set-Content ${{ env.SCRIPT_NAME }}
 
       - name: Build exe
-        uses: MohamedSaidSallam/AHK2Exe-GitHub-Action@main
+        uses: MohamedSaidSallam/AHK2Exe-GitHub-Action@v1
         with:
           in: ${{ env.SCRIPT_NAME }}
           out: ${{ env.RELEASE_FILE_NAME }}
